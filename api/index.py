@@ -161,6 +161,12 @@ def home():
         "index_generated.html",
         text=translations[lang]
     )
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+
 # Google Login
 # ------------------------------
 @app.route("/google_login")
