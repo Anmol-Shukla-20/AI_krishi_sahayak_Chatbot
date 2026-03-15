@@ -135,37 +135,27 @@ def signup():
 # ------------------------------
 # Login
 # ------------------------------
-@app.route("/login", methods=["GET","POST"])
-def login():
+# @app.route("/login", methods=["GET","POST"])
+# def login():
 
-    if request.method == "POST":
+#     if request.method == "POST":
 
-        email = request.form["email"]
-        password = request.form["password"]
+#         email = request.form["email"]
+#         password = request.form["password"]
 
-        user = User.query.filter_by(email=email).first()
+#         user = User.query.filter_by(email=email).first()
 
-        if user and check_password_hash(user.password, password):
+#         if user and check_password_hash(user.password, password):
 
-            session["user"] = email
+#             session["user"] = email
 
-            return redirect("/dashboard")
-        else:
-            flash('Invalid email or password.', 'danger')
+#             return redirect("/dashboard")
+#         else:
+#             flash('Invalid email or password.', 'danger')
 
-    return render_template("login.html")
-
-
-@app.route("/home")
-def intro():
-    return render_template("home.html")
-
-@app.route("/contact")
-def contact():
-    return render_template("contact.html")
+#     return render_template("login.html")
 
 
-# ------------------------------
 # Google Login
 # ------------------------------
 @app.route("/google_login")
@@ -179,12 +169,31 @@ def google_login():
 def google_authorize():
 
     token = google.authorize_access_token()
-
-    user_info = token["userinfo"]
+    
+    resp = google.get("userinfo")
+    user_info = resp.json()
 
     session["user"] = user_info["email"]
+    session["name"] = user_info["name"]
 
-    return redirect("/dashboard")
+    return redirect("/home")
+    # user_info = token["userinfo"]
+
+    # session["user"] = user_info["email"]
+
+    # return redirect("/dashboard")
+
+
+@app.route("/home")
+def intro():
+    if "user" not in session:
+        return redirect("/login")
+    return render_template("home.html")
+
+@app.route("/contact")
+def contact():
+    return render_template("contact.html")
+
 
 # ------------------------------
 # Dashboard
