@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>{{ text.title }}</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body style="background-color: #bcbcbc;">
+
+
+<div id="google_translate_element" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,hi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+<div class="container-fluid">
+
+<a class="navbar-brand" href="/">🌾 {{ text.title }}</a>
+
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarNav">
+
+<ul class="navbar-nav me-auto">
+
+<li class="nav-item">
+<a class="nav-link" href="/home">Home</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link active" href="/">Crop Predictor</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/weather">Weather</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/dashboard">Farmer's Dashboard</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/chatbot">Chatbot Assistance</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="/contact">Contact Developer</a>
+</li>
+
+</ul>
+
+
+<!-- RIGHT SIDE BUTTONS -->
+
+<div class="d-flex">
+
+<a href="/logout" class="btn btn-danger btn-sm">
+{{ text.logout }}
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</nav>
+
+
+<!-- ================= MAIN CONTAINER ================= -->
+
+<div class="container my-4">
+<div class="p-4 rounded-4 shadow" style="background-color: #eff3f6;">
+
+<h1 class="text-center text-success mb-4 mt-2 fw-bold" style="font-size: 2.2rem;">
+{{ text.title }} 🌾
+</h1>
+
+
+<!-- ================= CROP FORM ================= -->
+
+<form action="/predict" method="POST">
+
+<div class="row mb-3">
+
+<div class="col-md-4">
+<label class="fw-bold mb-1" style="font-size: 0.95rem;">Nitrogen</label>
+<input type="number" step="0.001" name="Nitrogen" class="form-control border-0" style="border-radius: 6px; padding: 10px;" required>
+</div>
+
+<div class="col-md-4">
+<label class="fw-bold mb-1" style="font-size: 0.95rem;">Phosphorus</label>
+<input type="number" step="0.001" name="Phosphorus" class="form-control border-0" style="border-radius: 6px; padding: 10px;" required>
+</div>
+
+<div class="col-md-4">
+<label class="fw-bold mb-1" style="font-size: 0.95rem;">Potassium</label>
+<input type="number" step="0.001" name="Potassium" class="form-control border-0" style="border-radius: 6px; padding: 10px;" required>
+</div>
+
+</div>
+
+
+<div class="row mb-3">
+
+<div class="col-md-4">
+<label class="fw-bold mb-1" style="font-size: 0.95rem;">Temperature</label>
+<input type="number" step="0.001" name="Temperature" class="form-control border-0" style="border-radius: 6px; padding: 10px;" required>
+</div>
+
+<div class="col-md-4">
+<label class="fw-bold mb-1" style="font-size: 0.95rem;">Humidity</label>
+<input type="number" step="0.001" name="Humidity" class="form-control border-0" style="border-radius: 6px; padding: 10px;" required>
+</div>
+
+<div class="col-md-4">
+<label class="fw-bold mb-1" style="font-size: 0.95rem;">PH</label>
+<input type="number" step="0.001" name="Ph" class="form-control border-0" style="border-radius: 6px; padding: 10px;" required>
+</div>
+
+</div>
+
+
+<div class="row mb-4">
+
+<div class="col-md-4">
+<label class="fw-bold mb-1" style="font-size: 0.95rem;">Rainfall</label>
+<input type="number" step="0.001" name="Rainfall" class="form-control border-0" style="border-radius: 6px; padding: 10px;" required>
+</div>
+
+</div>
+
+
+<div class="text-center mb-4">
+
+<button type="submit" class="btn btn-primary px-4 fw-bold" style="border-radius: 6px; font-size: 1.1rem; background-color: #0d6efd; border: none; padding: 10px 20px;">
+{{ text.predict }}
+</button>
+
+</div>
+
+</form>
+
+
+<!-- ================= RESULT ================= -->
+
+<div class="d-flex flex-column align-items-center mb-5">
+
+{% if image_file %}
+<div class="mb-3">
+    <img src="{{ url_for('static', filename=image_file) }}" alt="{{ result }}" class="img-fluid rounded shadow-lg" style="max-height: 250px; border: 3px solid #1f2328;">
+</div>
+{% endif %}
+
+<div class="text-white p-3 rounded" style="width: 280px; background-color: #1f2328;">
+<p class="mb-0 fw-bold" style="font-size: 1.05rem;">
+Recommended Crop to be grown is : <br>
+{% if result %}
+<br><span class="text-warning fs-3 fw-bold">{{ result|title }}</span>
+{% endif %}
+</p>
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

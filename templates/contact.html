@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Developer - Krishi Sahayak</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0f2f1 0%, #a5d6a7 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background-color: #2e7d32 !important;
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+        }
+        .card-custom {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        .card-custom:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #e8f5e9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            color: #1b5e20;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .college-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Google Translate Widget -->
+    <div id="google_translate_element" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,hi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5 shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="/">🌾 Smart Crop Recommendation</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Crop Predictor</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/weather">Weather</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard">Farmer's Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/chatbot">Chatbot Assistance</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/contact">Contact Developer</a></li>
+                </ul>
+                <div class="d-flex">
+                    <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="container py-4">
+        <h2 class="text-center fw-bold mb-5" style="color: #1b5e20;">Get In Touch & Information</h2>
+
+        <div class="row g-4 justify-content-center">
+            
+            <!-- Project Guidance Card -->
+            <div class="col-lg-6 col-md-12">
+                <div class="card card-custom p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="icon-circle me-3">🎓</div>
+                        <h4 class="section-title mb-0">Project Guidance</h4>
+                    </div>
+                    <p class="text-muted fs-5">
+                        This project has been meticulously developed under the expert guidance of 
+                        <strong class="text-dark">Dr. V. Prem Prakash Sir</strong> as a core part of the DETD Project at 
+                        <strong class="text-dark">Dayalbagh Educational Institute, Agra</strong>.
+                    </p>
+                    
+                    <div class="text-center mt-4">
+                        <h5 class="text-secondary fw-bold">Our Esteemed Institute</h5>
+                        <img src="{{ url_for('static', filename='images/dei.webp') }}" class="college-img" alt="DEI Agra">
+                        <p class="mt-3 text-muted">A premier institute committed to value-based technical education.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Developer Contact Card -->
+            <div class="col-lg-6 col-md-12">
+                <div class="card card-custom p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="icon-circle me-3">👨‍💻</div>
+                        <h4 class="section-title mb-0">Contact the Developer</h4>
+                    </div>
+                    <p class="text-muted fs-5 mb-4">
+                        Have queries regarding this agriculture recommendation system? Need assistance or have feature suggestions? Feel free to reach out to me! 😊
+                    </p>
+                    
+                    <ul class="list-group list-group-flush mt-3 fs-5">
+                        <li class="list-group-item bg-transparent border-bottom px-0 py-3">
+                            <span class="fw-bold me-2" style="color: #2e7d32;">👤 Name:</span> 
+                            Anmol Shukla
+                        </li>
+                        <li class="list-group-item bg-transparent border-bottom px-0 py-3">
+                            <span class="fw-bold me-2" style="color: #2e7d32;">📧 Email:</span> 
+                            <a href="mailto:shuklaan2005@gmail.com" class="text-decoration-none">shuklaan2005@gmail.com</a>
+                        </li>
+                        <li class="list-group-item bg-transparent border-bottom px-0 py-3">
+                            <span class="fw-bold me-2" style="color: #2e7d32;">🏫 Institute:</span> 
+                            DEI, Agra
+                        </li>
+                    </ul>
+
+                    <div class="mt-auto pt-4 text-center">
+                        <a href="mailto:shuklaan2005@gmail.com" class="btn btn-success btn-lg px-5 rounded-pill shadow-sm">Send an Email</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

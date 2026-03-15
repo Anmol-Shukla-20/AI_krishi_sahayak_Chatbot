@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard - Krishi Sahayak</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #4a90e2 0%, #87ceeb 50%, #e0f6ff 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+        .navbar {
+            background-color: #2e7d32 !important;
+        }
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+        }
+        .weather-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 40px;
+            margin-top: 30px;
+        }
+        .temp-display {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            line-height: 1;
+        }
+        .weather-condition {
+            font-size: 1.5rem;
+            color: #475569;
+            text-transform: capitalize;
+            font-weight: 500;
+        }
+        .metric-box {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .metric-box:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.8);
+        }
+        .metric-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .metric-label {
+            font-size: 0.9rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .metric-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .city-name {
+            font-size: 2.2rem;
+            color: #0f172a;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Google Translate Widget -->
+    <div id="google_translate_element" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,hi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="/">🌾 Smart Crop Recommendation</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Crop Predictor</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/weather">Weather</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dashboard">Farmer's Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/chatbot">Chatbot Assistance</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact">Contact Developer</a></li>
+                </ul>
+                <div class="d-flex">
+                    <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="container mb-5">
+        
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                
+                <!-- City Search Form -->
+                <div class="card shadow-sm border-0 mb-4" style="border-radius: 15px; background: rgba(255,255,255,0.9);">
+                    <div class="card-body p-4">
+                        <form action="/weather" method="POST" class="d-flex align-items-center">
+                            <label for="citySearch" class="fw-bold text-success me-3 mb-0" style="white-space: nowrap;">🌍 Check Location:</label>
+                            <input type="text" id="citySearch" name="city" class="form-control me-2" placeholder="Enter State or City Name (e.g. Mumbai, Punjab)..." required style="border-radius: 10px;">
+                            <button type="submit" class="btn btn-primary" style="border-radius: 10px; padding-left: 20px; padding-right: 20px;">Search</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="weather-card">
+                    
+                    <div class="text-center mb-5">
+                        <h2 class="city-name mb-0 pt-2">📍 {{ current_city|title }}, India</h2>
+                        <p class="text-secondary mt-1">Current Farming Conditions</p>
+                    </div>
+
+                    <div class="row align-items-center mb-5">
+                        <div class="col-md-6 text-center text-md-end pe-md-5 border-md-end">
+                            <div class="temp-display">{{ temperature }}°C</div>
+                            <div class="weather-condition mt-2">{{ description }}</div>
+                        </div>
+                        <div class="col-md-6 text-center text-md-start ps-md-5 mt-4 mt-md-0 d-flex flex-column align-items-center align-items-md-start">
+                            <span style="font-size: 5rem; line-height: 1;">
+                                {% if 'clear' in description|lower %} ☀️ 
+                                {% elif 'cloud' in description|lower %} ☁️ 
+                                {% elif 'rain' in description|lower %} 🌧️ 
+                                {% elif 'snow' in description|lower %} ❄️ 
+                                {% else %} 🌤️ {% endif %}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row g-4 mt-2">
+                        <!-- Humidity -->
+                        <div class="col-6 col-md-4">
+                            <div class="metric-box">
+                                <div class="metric-icon">💧</div>
+                                <div class="metric-label">Humidity</div>
+                                <div class="metric-value">{{ humidity }}<span style="font-size:1rem;color:#64748b;">%</span></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Wind Speed -->
+                        <div class="col-6 col-md-4">
+                            <div class="metric-box">
+                                <div class="metric-icon">💨</div>
+                                <div class="metric-label">Wind Speed</div>
+                                <div class="metric-value">{{ wind }}<span style="font-size:1rem;color:#64748b;"> m/s</span></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Atmospheric Pressure -->
+                        <div class="col-12 col-md-4">
+                            <div class="metric-box">
+                                <div class="metric-icon">⏲️</div>
+                                <div class="metric-label">Pressure</div>
+                                <div class="metric-value">{{ pressure }}<span style="font-size:1rem;color:#64748b;"> hPa</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
