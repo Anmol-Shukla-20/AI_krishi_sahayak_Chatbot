@@ -31,7 +31,7 @@ app.secret_key = os.getenv("SECRET_KEY")
 basedir = os.path.abspath(os.path.dirname(__file__))
 # Bind the raw SQLite database directly to the instance folder inside the app's exact directory.
 db_path = os.path.join(basedir, 'instance', 'database.db')
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/database.db'
 db = SQLAlchemy(app)
 
 # ------------------------------
