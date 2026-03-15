@@ -181,9 +181,9 @@ def google_authorize():
 
     token = google.authorize_access_token()
     
-    resp = google.get("userinfo")
+    # resp = google.get("userinfo")
+    resp = google.get("https://www.googleapis.com/oauth2/v2/userinfo")
     user_info = resp.json()
-
     session["user"] = user_info["email"]
     session["name"] = user_info["name"]
 
