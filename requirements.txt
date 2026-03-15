@@ -1,0 +1,11 @@
+# download the following requirements.txt file
+# from flask import Flask, render_template, request, redirect, session, url_for, flash
+# import joblib
+# import numpy as np
+# import os
+# from dotenv import load_dotenv
+# from authlib.integrations.flask_client import OAuth
+# from flask_sqlalchemy import SQLAlchemy
+# from werkzeug.security import generate_password_hash, check_password_hash
+# import requests
+# from groq import Groq
