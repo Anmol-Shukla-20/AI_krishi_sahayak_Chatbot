@@ -89,48 +89,34 @@ scaler = model_data['scaler']
 le = model_data['label_encoder']
 model = model_data['model']
 
-# ------------------------------
-#Routes
-# ------------------------------
-@app.route('/')
-def home():
 
-    if "user" not in session:
-        return redirect("/login")
 
-    lang = session.get("lang", "en")
-
-    return render_template(
-        "index_generated.html",
-        text=translations[lang]
-    )
-
-# ------------------------------
+# manual routes to be implemented -------------
 # Signup
 # ------------------------------
-@app.route("/signup", methods=["GET","POST"])
-def signup():
+# @app.route("/signup", methods=["GET","POST"])
+# def signup():
 
-    if request.method == "POST":
+#     if request.method == "POST":
 
-        email = request.form["email"]
+#         email = request.form["email"]
         
-        existing_user = User.query.filter_by(email=email).first()
-        if existing_user:
-            flash('Email already registered. Please login.', 'danger')
-            return redirect("/signup")
+#         existing_user = User.query.filter_by(email=email).first()
+#         if existing_user:
+#             flash('Email already registered. Please login.', 'danger')
+#             return redirect("/signup")
 
-        password = generate_password_hash(request.form["password"])
+#         password = generate_password_hash(request.form["password"])
 
-        user = User(email=email, password=password)
+#         user = User(email=email, password=password)
 
-        db.session.add(user)
-        db.session.commit()
+#         db.session.add(user)
+#         db.session.commit()
         
-        flash('Account created successfully! Please login.', 'success')
-        return redirect("/login")
+#         flash('Account created successfully! Please login.', 'success')
+#         return redirect("/login")
 
-    return render_template("signup.html")
+#     return render_template("signup.html")
 
 # ------------------------------
 # Login
@@ -156,13 +142,32 @@ def signup():
 #     return render_template("login.html")
 
 
+
+
+
+
+# ------------------------------
+#Routes
+# ------------------------------
+@app.route('/')
+def home():
+
+    if "user" not in session:
+        return redirect("/login")
+
+    lang = session.get("lang", "en")
+
+    return render_template(
+        "index_generated.html",
+        text=translations[lang]
+    )
 # Google Login
 # ------------------------------
 @app.route("/google_login")
 def google_login():
 
     # redirect_uri = url_for("google_authorize", _external=True)
-    redirect_uri = "https://ai-krishi-sahayak-chatbot.onrender.com/google_login"
+    redirect_uri = "https://ai-krishi-sahayak-chatbot.onrender.com/authorize"
     return google.authorize_redirect(redirect_uri)
 
 @app.route("/authorize")
@@ -176,7 +181,7 @@ def google_authorize():
     session["user"] = user_info["email"]
     session["name"] = user_info["name"]
 
-    return redirect("/home")
+    return redirect("/")
     # user_info = token["userinfo"]
 
     # session["user"] = user_info["email"]
