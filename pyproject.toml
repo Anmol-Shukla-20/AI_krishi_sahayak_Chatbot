@@ -2,4 +2,13 @@
 name = "krishi-sahayak"
 version = "0.1.0"
 description = "Flask ML app"
-dependencies = []
+requires-python = ">=3.10"
+
+dependencies = [
+    "flask",
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "joblib",
+    "requests"
+]
