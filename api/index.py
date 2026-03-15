@@ -15,7 +15,7 @@ load_dotenv(override=True)
 
 
 grok_client = Groq(
-    api_key=os.getenv("GROK_API_KEY")
+    api_key=os.environ.get("GROK_API_KEY")
 )
 
 
@@ -23,7 +23,7 @@ grok_client = Groq(
 # Initialize Flask
 # ------------------------------
 app = Flask(__name__, template_folder="../templates", static_folder="../static")
-app.secret_key = os.getenv("SECRET_KEY")
+app.secret_key = os.environ.get("SECRET_KEY")
 
 # ------------------------------
 # Database
@@ -53,8 +53,8 @@ oauth = OAuth(app)
 
 google = oauth.register(
     name="google",
-    client_id=os.getenv("GOOGLE_CLIENT_ID"),
-    client_secret=os.getenv("GOOGLE_CLIENT_SECRET"),
+    client_id=os.environ.get("GOOGLE_CLIENT_ID"),
+    client_secret=os.environ.get("GOOGLE_CLIENT_SECRET"),
     server_metadata_url="https://accounts.google.com/.well-known/openid-configuration",
     client_kwargs={"scope": "openid email profile"}
 )
@@ -195,7 +195,7 @@ def google_authorize():
     session["user"] = user_info["email"]
     session["name"] = user_info["name"]
 
-    return redirect("/home")
+    return redirect("/")
     # user_info = token["userinfo"]
     # session["user"] = user_info["email"]
     # return redirect("/dashboard")
@@ -230,7 +230,7 @@ def weather():
     if request.method == "POST":
         city = request.form.get("city", "Lucknow").strip()
 
-    api_key = os.getenv("WEATHER_API_KEY")
+    api_key = os.environ.get("WEATHER_API_KEY")
 
     url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
 
