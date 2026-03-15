@@ -149,6 +149,14 @@ model = model_data['model']
 # ------------------------------
 #Routes
 # ------------------------------
+
+# @app.route("/home")
+# def intro():
+#     if "user" not in session:
+#         return redirect("/login")
+#     return render_template("home.html")
+
+
 @app.route('/')
 def home():
 
@@ -189,17 +197,8 @@ def google_authorize():
 
     return redirect("/home")
     # user_info = token["userinfo"]
-
     # session["user"] = user_info["email"]
-
     # return redirect("/dashboard")
-
-
-@app.route("/home")
-def intro():
-    if "user" not in session:
-        return redirect("/login")
-    return render_template("home.html")
 
 @app.route("/contact")
 def contact():
