@@ -348,10 +348,9 @@ def logout():
 
     return redirect("/login")
 
-app = app
+
 # ------------------------------
 # Run App
-# ------------------------------
-# if __name__ == '__main__':   ---> only for local testing.
 
-#     app.run(host='127.0.0.1', port=5500, debug=True)
+if __name__ == '__main__':   
+    app.run(host='0.0.0.0', port=10000)
