@@ -187,7 +187,7 @@ def google_authorize():
     session["user"] = user_info["email"]
     session["name"] = user_info["name"]
 
-    return redirect("/")
+    return redirect("/home")
     # user_info = token["userinfo"]
 
     # session["user"] = user_info["email"]
