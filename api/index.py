@@ -171,8 +171,8 @@ def contact():
 @app.route("/google_login")
 def google_login():
 
-    redirect_uri = url_for("google_authorize", _external=True)
-
+    # redirect_uri = url_for("google_authorize", _external=True)
+    redirect_uri = "https://ai-krishi-sahayak-chatbot.onrender.com/google_login"
     return google.authorize_redirect(redirect_uri)
 
 @app.route("/authorize")
