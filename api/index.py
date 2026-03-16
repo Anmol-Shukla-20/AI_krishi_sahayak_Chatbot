@@ -150,11 +150,11 @@ model = model_data['model']
 #Routes
 # ------------------------------
 
-# @app.route("/home")
-# def intro():
-#     if "user" not in session:
-#         return redirect("/login")
-#     return render_template("home.html")
+@app.route("/home")
+def intro():
+    if "user" not in session:
+        return redirect("/login")
+    return render_template("home.html")
 
 
 @app.route('/')
