@@ -530,7 +530,7 @@ plt.show()
 
 
     
-asset/image_1.png
+![Image](asset/image_1.png)
     
 
 
