@@ -89,63 +89,6 @@ scaler = model_data['scaler']
 le = model_data['label_encoder']
 model = model_data['model']
 
-
-
-# manual routes to be implemented -------------
-# Signup
-# ------------------------------
-# @app.route("/signup", methods=["GET","POST"])
-# def signup():
-
-#     if request.method == "POST":
-
-#         email = request.form["email"]
-        
-#         existing_user = User.query.filter_by(email=email).first()
-#         if existing_user:
-#             flash('Email already registered. Please login.', 'danger')
-#             return redirect("/signup")
-
-#         password = generate_password_hash(request.form["password"])
-
-#         user = User(email=email, password=password)
-
-#         db.session.add(user)
-#         db.session.commit()
-        
-#         flash('Account created successfully! Please login.', 'success')
-#         return redirect("/login")
-
-#     return render_template("signup.html")
-
-# ------------------------------
-# Login
-# ------------------------------
-# @app.route("/login", methods=["GET","POST"])
-# def login():
-
-#     if request.method == "POST":
-
-#         email = request.form["email"]
-#         password = request.form["password"]
-
-#         user = User.query.filter_by(email=email).first()
-
-#         if user and check_password_hash(user.password, password):
-
-#             session["user"] = email
-
-#             return redirect("/dashboard")
-#         else:
-#             flash('Invalid email or password.', 'danger')
-
-#     return render_template("login.html")
-
-
-
-
-
-
 # ------------------------------
 #Routes
 # ------------------------------
