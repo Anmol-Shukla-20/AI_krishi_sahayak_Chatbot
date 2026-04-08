@@ -530,7 +530,7 @@ plt.show()
 
 
     
-![Image](assets/image_1.png)
+asset/image_1.png
     
 
 
@@ -590,7 +590,7 @@ plt.show()
 
 
     
-![Image](assets/image_2.png)
+asset/image_2.png
     
 
 
@@ -602,8 +602,7 @@ plt.show()
 
 
     
-![Image](assets/image_3.png)
-    
+asset/image_3.png
 
 
 ## 3. Encoding Labels into Numerical values
@@ -655,7 +654,7 @@ plt.show()
 
 
     
-![Image](assets/image_4.png)
+asset/image_4.png
     
 
 
