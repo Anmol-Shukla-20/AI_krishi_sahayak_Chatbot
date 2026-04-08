@@ -588,11 +588,8 @@ plt.show()
       sns.distplot(crop['N'])  # to chek the spread out of the data.
     
 
-
+![Image](asset/image_2.png)
     
-asset/image_2.png
-    
-
 
 
 ```python
@@ -602,7 +599,7 @@ plt.show()
 
 
     
-asset/image_3.png
+![Image](asset/image_3.png)
 
 
 ## 3. Encoding Labels into Numerical values
@@ -652,12 +649,7 @@ crop[target_col].value_counts().plot(kind='bar', figsize=(12,5), title='Crop Dis
 plt.show()
 ```
 
-
-    
-asset/image_4.png
-    
-
-
+![Image](asset/image_4.png)
 
 ```python
 # crop.drop(['label'],axis = 1,inplace = True)
