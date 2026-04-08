@@ -530,7 +530,7 @@ plt.show()
 
 
     
-![png](Crop_Classification%28stand%2Bbasic%29_changed_files/Crop_Classification%28stand%2Bbasic%29_changed_14_0.png)
+![Image](assets/image_1.png)
     
 
 
@@ -590,7 +590,7 @@ plt.show()
 
 
     
-![png](Crop_Classification%28stand%2Bbasic%29_changed_files/Crop_Classification%28stand%2Bbasic%29_changed_16_1.png)
+![Image](assets/image_2.png)
     
 
 
@@ -602,7 +602,7 @@ plt.show()
 
 
     
-![png](Crop_Classification%28stand%2Bbasic%29_changed_files/Crop_Classification%28stand%2Bbasic%29_changed_17_0.png)
+![Image](assets/image_3.png)
     
 
 
@@ -655,7 +655,7 @@ plt.show()
 
 
     
-![png](Crop_Classification%28stand%2Bbasic%29_changed_files/Crop_Classification%28stand%2Bbasic%29_changed_21_0.png)
+![Image](assets/image_4.png)
     
 
 
