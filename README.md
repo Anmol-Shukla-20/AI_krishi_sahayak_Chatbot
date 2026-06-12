@@ -1,5 +1,7 @@
 # AI_krishi_Sahayak_Chatbot
-This is a project based on Crop Recommendation based on machine learning  techniques(Random Forest) and cleaner UI.It is also powered by chatbot features to answer user queries. I am still working on this project where I am trying to make a All in one app (digital place) for farmers that help them in farming and increase their productivity and helps them earn profit.
+This is a project based on Crop Recommendation based on machine learning  techniques(Random Forest) and cleaner UI.It is also powered by chatbot features to answer user queries. I am still working on this project where I am trying to make a All in one app (digital place) for farmers that help them in farming and increase their productivity and helps them earn profit. Below is the Given Machine Learning(ML) Code used for training and developing the Model.👇
+
+## ML Notebook Code
 
 ```python
 import numpy as np
